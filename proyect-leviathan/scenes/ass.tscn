@@ -1,11 +1,63 @@
-[gd_scene load_steps=7 format=3 uid="uid://b7dh5iduv8f33"]
+[gd_scene load_steps=16 format=3 uid="uid://b7dh5iduv8f33"]
 
-[ext_resource type="Script" uid="uid://dxf0eslpafu4t" path="res://scenes/player.gd" id="1_0kg26"]
-[ext_resource type="Texture2D" uid="uid://e3k4i3do66lx" path="res://assets/pulpo_Teest.png" id="2_8qh4o"]
+[ext_resource type="Script" uid="uid://dxf0eslpafu4t" path="res://scripts/player.gd" id="1_0kg26"]
+[ext_resource type="Script" uid="uid://dau3wm1cjlpkb" path="res://scripts/ass.gd" id="1_4joqy"]
+[ext_resource type="Texture2D" uid="uid://dnxwjy41mewjh" path="res://assets/pulpo_idle.png" id="3_4joqy"]
 [ext_resource type="Texture2D" uid="uid://c5tuok30plv0y" path="res://assets/sea_Tilemap.png" id="3_8qh4o"]
+[ext_resource type="Script" uid="uid://dia02sm51d7bl" path="res://scripts/camera_2d.gd" id="3_sys6g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sys6g"]
-size = Vector2(29, 28)
+size = Vector2(48, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4xy6t"]
+atlas = ExtResource("3_4joqy")
+region = Rect2(0, 0, 1500, 1500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dx1wb"]
+atlas = ExtResource("3_4joqy")
+region = Rect2(1500, 0, 1500, 1500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dowap"]
+atlas = ExtResource("3_4joqy")
+region = Rect2(3000, 0, 1500, 1500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rxc1l"]
+atlas = ExtResource("3_4joqy")
+region = Rect2(4500, 0, 1500, 1500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xqtn7"]
+atlas = ExtResource("3_4joqy")
+region = Rect2(6000, 0, 1500, 1500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u580q"]
+atlas = ExtResource("3_4joqy")
+region = Rect2(7500, 0, 1500, 1500)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ntbp3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4xy6t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dx1wb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dowap")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rxc1l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xqtn7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u580q")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sys6g"]
 texture = ExtResource("3_8qh4o")
@@ -45,6 +97,7 @@ texture = ExtResource("3_8qh4o")
 10:2/0 = 0
 11:2/0 = 0
 0:3/0 = 0
+0:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:3/0 = 0
 1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:3/0 = 0
@@ -109,28 +162,34 @@ texture = ExtResource("3_8qh4o")
 0:8/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_4joqy"]
-physics_layer_0/collision_layer = 3
+physics_layer_0/collision_layer = 8
+physics_layer_0/collision_mask = 0
 sources/1 = SubResource("TileSetAtlasSource_sys6g")
 
 [node name="ass" type="Node2D"]
+script = ExtResource("1_4joqy")
 
 [node name="player" type="CharacterBody2D" parent="."]
-position = Vector2(-2, -1)
-collision_mask = 2
+position = Vector2(-2, 110)
+collision_mask = 10
 script = ExtResource("1_0kg26")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
-position = Vector2(-0.5, 0)
+position = Vector2(-9, -15)
 shape = SubResource("RectangleShape2D_sys6g")
 
-[node name="PulpoTeest" type="Sprite2D" parent="player"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="player"]
 scale = Vector2(0.1, 0.1)
-texture = ExtResource("2_8qh4o")
+sprite_frames = SubResource("SpriteFrames_ntbp3")
+animation = &"idle"
+frame_progress = 0.38776234
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="player"]
+position = Vector2(2, -2)
+script = ExtResource("3_sys6g")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_4joqy")
 collision_visibility_mode = 1
 format = 2
-layer_0/tile_data = PackedInt32Array(655346, 65537, 3, 655378, 196609, 3, 655347, 131073, 3, 655348, 131073, 3, 655349, 131073, 3, 655350, 131073, 3, 655351, 131073, 3, 655352, 131073, 3, 655353, 131073, 3, 655354, 131073, 3, 655355, 131073, 3, 655356, 131073, 3, 655357, 131073, 3, 655358, 131073, 3, 655359, 131073, 3, 589824, 131073, 3, 589825, 131073, 3, 589826, 131073, 3, 655363, 131073, 3, 655364, 131073, 3, 655365, 131073, 3, 655366, 131073, 3, 655367, 131073, 3, 655368, 131073, 3, 655369, 131073, 3, 655370, 131073, 3, 655371, 131073, 3, 655372, 131073, 3, 655373, 131073, 3, 655374, 131073, 3, 655375, 131073, 3, 655376, 131073, 3, 655377, 131073, 3)
+layer_0/tile_data = PackedInt32Array(786421, 131073, 3, 786422, 131073, 3, 786423, 131073, 3, 786424, 131073, 3, 786425, 131073, 3, 786426, 131073, 3, 786427, 131073, 3, 786428, 131073, 3, 786429, 131073, 3, 786430, 131073, 3, 786431, 131073, 3, 720896, 131073, 3, 720897, 131073, 3, 720898, 131073, 3, 720899, 131073, 3, 720900, 131073, 3, 720901, 131073, 3, 720902, 131073, 3, 720903, 131073, 3, 720904, 131073, 3, 720905, 131073, 3, 720906, 131073, 3, 720907, 131073, 3, 720908, 131073, 3, 720909, 131073, 3, 720910, 131073, 3, 720911, 131073, 3, 720912, 131073, 3, 786420, 1, 3, 786419, 1, 3, 786418, 1, 3, 786417, 1, 3, 786416, 1, 3, 786415, 1, 3, 786414, 1, 3, 786413, 1, 3, 786412, 1, 3, 786411, 1, 3, 786410, 1, 3, 786409, 1, 3, 786408, 1, 3, 786407, 1, 3, 786406, 1, 3, 786405, 1, 3, 786404, 1, 3, 786403, 1, 3, 786402, 1, 3, 786401, 1, 3, 720865, 1, 3, 655329, 1, 3, 589793, 1, 3, 524257, 1, 3, 458721, 1, 3, 393185, 1, 3, 327649, 1, 3, 262113, 1, 3, 196577, 1, 3, 131041, 1, 3, 65505, 1, 3, -31, 1, 3, -65567, 1, 3, -131103, 1, 3, -196639, 1, 3, -262175, 1, 3, -327711, 1, 3, -393247, 1, 3, -458783, 1, 3, -524319, 1, 3, -589855, 1, 3, -655391, 1, 3, -720927, 1, 3, -786463, 1, 3, -851999, 1, 3, -851998, 1, 3, -851997, 1, 3, -851996, 1, 3, -851995, 1, 3, -851994, 1, 3, -851993, 1, 3, -851992, 1, 3, -851991, 1, 3, -851990, 1, 3, -851989, 1, 3, -851988, 1, 3, -851987, 1, 3, -851986, 1, 3, -851985, 1, 3, -851984, 1, 3, -851983, 1, 3, -851982, 1, 3, -851981, 1, 3, -851980, 1, 3, -851979, 1, 3, -851978, 1, 3, -851977, 1, 3, -851976, 1, 3, -851975, 1, 3, -851974, 1, 3, -851973, 1, 3, -851972, 1, 3, -851971, 1, 3, -851970, 1, 3, -851969, 1, 3, -917504, 1, 3, -917503, 1, 3, -917502, 1, 3, -917501, 1, 3, -917500, 1, 3, -917499, 1, 3, -917498, 1, 3, -917497, 1, 3, -917496, 1, 3, -917495, 1, 3, -917494, 1, 3, -917493, 1, 3, -917492, 1, 3, -917491, 1, 3, -917490, 1, 3, -917489, 1, 3, -917488, 1, 3, -917487, 1, 3, -917486, 1, 3, -917485, 1, 3, -917484, 1, 3, -917483, 1, 3, -851947, 1, 3, -786411, 1, 3, -720875, 1, 3, -655339, 1, 3, -589803, 1, 3, -524267, 1, 3, -458731, 1, 3, -393195, 1, 3, -327659, 1, 3, -262123, 1, 3, -196587, 1, 3, -131051, 1, 3, -65515, 1, 3, 21, 1, 3, 65557, 1, 3, 131093, 1, 3, 196629, 1, 3, 262165, 1, 3, 327701, 1, 3, 393237, 1, 3, 458773, 1, 3, 524309, 1, 3, 589845, 1, 3, 655381, 1, 3, 720917, 1, 3, 720916, 1, 3, 720915, 1, 3, 720914, 1, 3, 720913, 1, 3)
