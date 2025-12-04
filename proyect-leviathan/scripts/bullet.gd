@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var speed: float = 500
+@export var speed: float = 700
 var dir: float
 var spawnPos: Vector2
 var spawnRot: float

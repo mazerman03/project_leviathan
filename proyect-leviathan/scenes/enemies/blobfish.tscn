@@ -1,0 +1,77 @@
+[gd_scene load_steps=13 format=3 uid="uid://ofteimq72td0"]
+
+[ext_resource type="PackedScene" uid="uid://c5t51vm8y0170" path="res://scenes/enemies/base_enemy.tscn" id="1_2aihq"]
+[ext_resource type="Script" uid="uid://qheo3lb7h6by" path="res://scripts/blobfish.gd" id="2_2aihq"]
+[ext_resource type="Texture2D" uid="uid://bp0sirdutxs7v" path="res://assets/blobfish.png" id="2_ntel2"]
+[ext_resource type="Texture2D" uid="uid://dbon6edl1x5uy" path="res://assets/BurbMuerte_V2.png" id="3_meboy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2aihq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wkuje"]
+atlas = ExtResource("3_meboy")
+region = Rect2(0, 0, 5461, 5083)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7xnqg"]
+atlas = ExtResource("3_meboy")
+region = Rect2(5461, 0, 5461, 5083)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idtp1"]
+atlas = ExtResource("3_meboy")
+region = Rect2(10922, 0, 5461, 5083)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1kfim"]
+atlas = ExtResource("3_meboy")
+region = Rect2(16383, 0, 5461, 5083)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_267al"]
+atlas = ExtResource("3_meboy")
+region = Rect2(21844, 0, 5461, 5083)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5uasc"]
+atlas = ExtResource("3_meboy")
+region = Rect2(27305, 0, 5461, 5083)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ntel2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wkuje")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7xnqg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idtp1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1kfim")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_267al")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5uasc")
+}],
+"loop": false,
+"name": &"death",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ntel2")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="Base_Enemy" instance=ExtResource("1_2aihq")]
+script = ExtResource("2_2aihq")
+
+[node name="CollisionShape2D" parent="." index="0"]
+scale = Vector2(3, 3)
+shape = SubResource("RectangleShape2D_2aihq")
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_ntel2")
+animation = &"idle"

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b6aehmak66h1g"
+path="res://.godot/imported/AwesomeFishFunk007 (grace mclady mix).mp3-be323b5a7eac02bdc7ea4e2294ca1834.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/MUSIC/AwesomeFishFunk007 (grace mclady mix).mp3"
+dest_files=["res://.godot/imported/AwesomeFishFunk007 (grace mclady mix).mp3-be323b5a7eac02bdc7ea4e2294ca1834.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -8,6 +8,8 @@ func _ready() -> void:
 	max_hp = 1
 	damage = 4
 	
+	super()
+	
 	velocity = Vector2(-200,-250).normalized() * speed
 
 func behaviour(delta:float):
